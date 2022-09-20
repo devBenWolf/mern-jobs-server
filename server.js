@@ -1,6 +1,7 @@
 import express from "express"
 const app = express()
 import dotenv from "dotenv"
+import "express-async-errors"
 dotenv.config()
 
 // Middleware imports
@@ -17,7 +18,6 @@ import connectDB from "./db/connect.js"
 app.use(express.json())
 
 app.get(`/`, (req, res) => {
-    throw new Error(`Error`)
     res.send(`Hello!`)
 })
 
@@ -29,7 +29,7 @@ app.use(`/api/v1/jobs`, jobsRouter)
 app.use(notFound)
 app.use(errorHandler)
 
-const port  = process.env.PORT || 5000
+const port  = process.env.PORT
 
 const start = async() => {
     try {
